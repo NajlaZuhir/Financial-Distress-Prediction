@@ -1,33 +1,25 @@
 import requests
 import random
 import joblib
+import os
 
-# Load optimal features from your saved file
-optimal_features = joblib.load("/workspaces/Financial-Distress-Predictor/models/optimal_features.pkl")
+# Load final feature list
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_DIR = os.path.join(BASE_DIR, "models")
+final_features = joblib.load(os.path.join(MODEL_DIR, "final_features.pkl"))
 
-# URL of the FastAPI batch endpoint
-url = "http://127.0.0.1:8000/predict_batch"
+url = "http://127.0.0.1:8001/predict"
 
-# Generate a batch of 5 sample companies with random feature values
-batch_data = {
-    "companies": []
+# Generate ONE sample company
+company_features = {f: random.random() for f in final_features}
+payload = {
+    "features": company_features
 }
 
-for _ in range(5):
-    company_features = {f: random.random() for f in optimal_features}
-    batch_data["companies"].append({"features": company_features})
+response = requests.post(url, json=payload)
 
-print("Sample batch input data:")
-for i, c in enumerate(batch_data["companies"], 1):
-    print(f"Company {i}:", c["features"])
-
-# Send POST request to FastAPI
-response = requests.post(url, json=batch_data)
-
-# Print response
 if response.status_code == 200:
-    print("\nBatch prediction results:")
-    for i, res in enumerate(response.json()["results"], 1):
-        print(f"Company {i}:", res)
+    print("\nPrediction result:")
+    print(response.json())
 else:
     print("Error:", response.status_code, response.text)
