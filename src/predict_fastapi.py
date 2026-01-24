@@ -30,7 +30,11 @@ def predict(data: CompanyFeatures):
     df = df.astype(float)
 
     # Predict probability
-    proba = model.predict_proba(df)[:, 1][0]
+    proba = model.predict_proba(
+        df,
+        validate_features=False
+    )[:, 1][0]
+
 
     # Apply business threshold
     prediction = int(proba >= threshold)
