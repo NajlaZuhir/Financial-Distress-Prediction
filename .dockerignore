@@ -1,0 +1,17 @@
+# Ignore virtual environment
+env/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore drafts or temporary files
+Drafts/
+
+# Git files
+.git/
+.gitignore
+
+
+# Ignore Jupyter checkpoints
+.ipynb_checkpoints/
