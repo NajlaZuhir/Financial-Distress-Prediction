@@ -201,6 +201,13 @@ if __name__ == "__main__":
     val_probs = model.predict_proba(X_val)[:, 1]
     y_val_pred = (val_probs >= optimal_threshold).astype(int)
 
+    report_dict = classification_report(y_val, y_val_pred, digits=4, output_dict=True)  # <-- save as dict
+
+    # Save report_dict and best_params
+    joblib.dump(best_params, os.path.join(MODEL_DIR, "best_params.pkl"))
+    joblib.dump(report_dict, os.path.join(MODEL_DIR, "report_dict.pkl"))
+
+
     print("\n" + "="*60)
     print("VALIDATION RESULTS (with optimal threshold)")
     print("="*60)
@@ -250,7 +257,10 @@ if __name__ == "__main__":
     print("✅ Training Complete!")
     print("="*60)
     print(f"Saved artifacts to `{MODEL_DIR}/`:")
-    print(f"  - xgb_final_model.pkl")
-    print(f"  - final_features.pkl")
-    print(f"  - optimal_threshold.pkl (threshold={optimal_threshold})")
-    print(f"  - test.csv (test set with {len(test_df)} samples)")
+    print("Saved artifacts for MLflow integration:")
+    print(f"- best_params.pkl")
+    print(f"- report_dict.pkl")
+    print(f"- xgb_final_model.pkl")
+    print(f"- final_features.pkl")
+    print(f"- optimal_threshold.pkl")
+    print(f"- test.csv")
