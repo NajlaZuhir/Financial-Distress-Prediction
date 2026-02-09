@@ -4,7 +4,7 @@ import os
 import joblib
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_DIR = os.path.join(BASE_DIR, "models")
+MODEL_DIR = os.path.join(BASE_DIR, "artifacts")
 
 # Load test set saved by train.py
 test_df = pd.read_csv(os.path.join(MODEL_DIR, "test.csv"))

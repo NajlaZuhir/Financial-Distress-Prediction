@@ -8,7 +8,7 @@ import random
 
 # Load artifacts
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_DIR = os.path.join(BASE_DIR, "models")
+MODEL_DIR = os.path.join(BASE_DIR, "artifacts")
 
 model = joblib.load(os.path.join(MODEL_DIR, "xgb_final_model.pkl"))
 final_features = joblib.load(os.path.join(MODEL_DIR, "final_features.pkl"))

@@ -10,7 +10,7 @@ from mlflow.tracking import MlflowClient
 # Paths
 # -----------------------------
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # one level up
-MODEL_DIR = os.path.join(BASE_DIR, "models")
+MODEL_DIR = os.path.join(BASE_DIR, "artifacts")
 
 BEST_PARAMS_PATH = os.path.join(MODEL_DIR, "best_params.pkl")
 REPORT_DICT_PATH = os.path.join(MODEL_DIR, "report_dict.pkl")
@@ -115,6 +115,6 @@ if __name__ == "__main__":
     transition_to_production(model_name)
 
     # Predict using production version
-    model_uri_prod = f"models:/{model_name}/Production"
+    model_uri_prod = f"artifacts:/{model_name}/Production"
     predict_with_mlflow(model_uri_prod)
 

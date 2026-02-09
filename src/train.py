@@ -18,7 +18,7 @@ from xgboost import XGBClassifier
 # Config
 # -----------------------------
 DATA_PATH = "data/Financial Distress.csv"
-MODEL_DIR = "models"
+MODEL_DIR = "artifacts"
 RANDOM_STATE = 42
 
 os.makedirs(MODEL_DIR, exist_ok=True)
