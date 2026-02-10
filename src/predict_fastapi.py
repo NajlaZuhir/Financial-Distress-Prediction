@@ -46,3 +46,8 @@ def predict(data: CompanyFeatures):
 @app.get("/")
 def root():
     return {"message": "Financial Distress Prediction API is running!"}
+
+if __name__ == "__main__":
+    
+    import uvicorn
+    uvicorn.run("predict_fastapi:app", host="127.0.0.1", port=8001)
