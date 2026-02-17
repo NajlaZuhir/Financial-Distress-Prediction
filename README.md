@@ -12,21 +12,20 @@ This project identifies financially distressed companies — those struggling to
 - Docker
 
 ## 📊 Dataset
-- **Source:** [Financial Distress Dataset](https://www.kaggle.com/) from Kaggle
+- **Source:** [Financial Distress Dataset](https://www.kaggle.com/datasets/shebrahimi/financial-distress) from Kaggle
 - **Records:** 3,672
 - **Features:** 86
 
 ## 📁 Project Structure
 ```
-├── artifacts/         # Saved models & test set
+├── artifacts/         # Saved models & datasets
 ├── src/
 │   ├── train.py       # Model training with undersampling
 │   ├── predict.py     # Predictions & evaluation
 ├── main.py            # FastAPI app
 ├── app.py             # Streamlit UI
 ├── Dockerfile
-├── requirements.txt
-└── Notebook_Company_Distress_Prediction.ipynb
+└── requirements.txt
 ```
 
 ## 🚀 Quick Start
@@ -44,11 +43,4 @@ uvicorn main:app --reload
 streamlit run app.py
 ```
 
-## 🐳 Docker
-```bash
-docker build -t financial-distress-predictor .
-docker run -p 8000:8000 financial-distress-predictor
-```
-API available at `http://localhost:8000/docs`
-
-**DSAI Machine Learning Project**
+**Machine Learning Project | 2026**
