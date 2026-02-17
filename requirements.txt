@@ -1,8 +1,10 @@
-fastapi
-uvicorn
-pandas
+﻿pandas
 numpy
 scikit-learn
-joblib
 xgboost
+imbalanced-learn
+joblib
+fastapi
+uvicorn
+streamlit
 requests

@@ -1,97 +1,54 @@
-# Financial Distress Prediction – End-to-End ML & MLOps Pipeline
+# 🏦 Financial Distress Prediction
+An end-to-end machine learning project that classifies financially distressed companies using imbalanced learning techniques.
 
-## 📌 Problem Description
+## 📊 Project Overview
+This project identifies financially distressed companies — those struggling to pay employees, meet bill payments, or fulfil other financial obligations. After evaluating 3 ML models across 3 sampling techniques, Random Forest and XGBoost with Random Under-Sampling were selected and productionized into a FastAPI application.
 
-This project predicts corporate financial distress using financial indicators. From a business perspective, missing a distressed company is more costly than falsely flagging a healthy one, so the system prioritizes high recall on the minority (distressed) class using threshold tuning.
+## 🔧 Tech Stack
+- Python 3.10
+- scikit-learn, xgboost, imbalanced-learn
+- pandas, numpy
+- FastAPI, Streamlit
+- Docker
 
-## 🧠 Solution Overview
+## 📊 Dataset
+- **Source:** [Financial Distress Dataset](https://www.kaggle.com/) from Kaggle
+- **Records:** 3,672
+- **Features:** 86
 
-An end-to-end ML + MLOps pipeline covering:
-* Data preprocessing & feature engineering
-* Model training and tuning
-* Business-driven threshold optimization
-* Experiment tracking & model registry
-* Automated workflow orchestration
-* Containerized model deployment as a web service
-
-## 🏗️ Architecture (High Level)
-
+## 📁 Project Structure
 ```
-Data (CSV)
-   ↓
-train.py
-- Feature engineering
-- Stratified split (train/val/test)
-- XGBoost tuning
-- Threshold optimization
-- Artifact saving
-   ↓
-MLflow
-- Experiment tracking
-- Model registry
-   ↓
-Prefect
-- Orchestrates training + logging
-   ↓
-FastAPI
-- Online inference service
-   ↓
-Docker
-- Containerized deployment
-```
-
-## 🔬 EDA & Modeling
-
-* Target imbalance analyzed (~3–4% distressed)
-* Correlation-based feature selection
-* Models tried: baseline + XGBoost
-* Hyperparameter tuning via `RandomizedSearchCV`
-* Threshold tuning to achieve recall ≥ 0.6 on distressed companies
-
-## 🚀 Deployment
-
-* FastAPI used for real-time inference
-* Model, features, and threshold loaded as artifacts
-* Dockerized for portability and cloud readiness
-* REST endpoint: `/predict`
-
-## ⚙️ MLOps Components
-
-* **Experiment Tracking:** MLflow
-* **Model Registry:** MLflow (Production stage)
-* **Workflow Orchestration:** Prefect
-* **Model Serving:** FastAPI
-* **Containerization:** Docker
-* **Reproducibility:** Saved artifacts + requirements.txt
-
-## 📂 Project Structure
-
-```
-├── artifacts/
-├── env/
+├── artifacts/         # Saved models & test set
 ├── src/
-│   ├── train.py
-│   ├── predict_fastapi.py
-│   ├── mlflow_integration.py
-│   ├── prefect_flow.py
-│   └── test_predict.py
+│   ├── train.py       # Model training with undersampling
+│   ├── predict.py     # Predictions & evaluation
+├── main.py            # FastAPI app
+├── app.py             # Streamlit UI
 ├── Dockerfile
-├── .dockerignore
-├── .gitignore
-├── Notebook_Company_Distress_Prediction.ipynb
 ├── requirements.txt
-└── README.md
+└── Notebook_Company_Distress_Prediction.ipynb
 ```
 
-## ▶️ How to Run (Quick)
-
+## 🚀 Quick Start
 ```bash
+# Install dependencies
 pip install -r requirements.txt
+
+# Train models
 python src/train.py
-python src/prefect_flow.py
-uvicorn src.predict_fastapi:app --port 8000
+
+# Run API
+uvicorn main:app --reload
+
+# Run UI (separate terminal)
+streamlit run app.py
 ```
 
-## 🏷️ Project Type
+## 🐳 Docker
+```bash
+docker build -t financial-distress-predictor .
+docker run -p 8000:8000 financial-distress-predictor
+```
+API available at `http://localhost:8000/docs`
 
-End-to-End Machine Learning & MLOps Project
+**DSAI Machine Learning Project**

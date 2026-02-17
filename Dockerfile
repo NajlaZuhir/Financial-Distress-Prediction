@@ -1,18 +1,17 @@
-# 1️⃣ Base image
+# Base image
 FROM python:3.10-slim
 
-# 2️⃣ Set working directory
+# Set working directory
 WORKDIR /app
 
-# 3️⃣ Copy requirements and install dependencies first (for caching)
+# Copy requirements and install dependencies first (for caching)
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# 4️⃣ Copy project files (excluding things in .dockerignore)
-COPY . .
+# Copy project files
+COPY src/ ./src/
+COPY artifacts/ ./artifacts/
+COPY main.py .
 
-# 5️⃣ Expose FastAPI port
-EXPOSE 8000
-
-# 6️⃣ Start FastAPI
-CMD ["uvicorn", "src.predict_fastapi:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Start FastAPI
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
